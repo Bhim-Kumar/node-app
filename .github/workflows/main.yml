@@ -46,6 +46,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Update values.yaml
+        run: |
+          cd nodeapp
+          sed -i 's|tag:.*|tag: '${{ github.sha }}'|' values.yaml 
+          git config --global user.name 'Bhim-Kumar'
+          git config --global user.email 'itsme.aryan67@gmail.com'
+          git add values.yaml
+          git commit -m "Update values.yaml"
+          git push
       
     
       
