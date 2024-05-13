@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nodeapp
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  source:
+    repoURL: https://github.com/Bhim-Kumar/node-app.git
+    targetRevision: HEAD
+    path: nodeapp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
